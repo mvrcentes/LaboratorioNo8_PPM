@@ -31,31 +31,6 @@ class MainActivity : AppCompatActivity() {
 
         navController = navHostFragment.navController
         setupActionBarWithNavController(navController)
-
-
-//        val client = ApiClient.simpleService.listPosts(object : Callback<Pokemon>){
-//            fun onReponse(
-//                call: Call<PokemonResponse>,
-//                responde: Response<PokemonResponse>
-//            ) {
-//            }
-//        }
-
-        val client = ApiClient.service.getFirst100Pokemon()
-        client.enqueue(object : retrofit2.Callback<PokemonResponse>{
-            override fun onResponse(
-                call: Call<PokemonResponse>,
-                response: Response<PokemonResponse>
-            ) {
-                if(response.isSuccessful){
-                    Log.d("results", ""+response.body())
-                }
-            }
-
-            override fun onFailure(call: Call<PokemonResponse>, t: Throwable){
-                Log.e("failed", ""+t.message)
-            }
-        })
     }
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()

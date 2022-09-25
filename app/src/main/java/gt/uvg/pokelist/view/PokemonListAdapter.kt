@@ -20,7 +20,7 @@ class PokemonListAdapter(private val pokemonList: List<Pokemon>) : RecyclerView.
 
 
     override fun onBindViewHolder(holder: PokemonListHolder, position: Int) {
-        val pokemon = pokemonList.get(position)
+        val pokemon = pokemonList[position]
         holder.binding.pokemonName.text = pokemon.name
         Picasso.get().load(pokemon.imageUrlFront).into(holder.binding.pokemonPhoto)
 
