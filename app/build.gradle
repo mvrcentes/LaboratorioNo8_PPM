@@ -65,8 +65,4 @@ dependencies {
 
     //Retrofit with Moshi
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
-
-    //Coil
-    implementation("io.coil-kt:coil:1.3.0")
-
 }

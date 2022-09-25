@@ -2,17 +2,13 @@
 package gt.uvg.pokelist.view
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import gt.uvg.pokelist.R
 import gt.uvg.pokelist.databinding.ActivityMainBinding
-import gt.uvg.pokelist.model.ApiClient
-import gt.uvg.pokelist.model.PokemonResponse
-import retrofit2.Call
-import retrofit2.Response
+
 
 class MainActivity : AppCompatActivity() {
 
