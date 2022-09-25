@@ -10,6 +10,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import gt.uvg.pokelist.R
 import gt.uvg.pokelist.databinding.ActivityMainBinding
 import gt.uvg.pokelist.model.ApiClient
+import gt.uvg.pokelist.model.PokemonResponse
+import retrofit2.Call
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,6 +40,22 @@ class MainActivity : AppCompatActivity() {
 //            ) {
 //            }
 //        }
+
+        val client = ApiClient.service.getFirst100Pokemon()
+        client.enqueue(object : retrofit2.Callback<PokemonResponse>{
+            override fun onResponse(
+                call: Call<PokemonResponse>,
+                response: Response<PokemonResponse>
+            ) {
+                if(response.isSuccessful){
+                    Log.d("results", ""+response.body())
+                }
+            }
+
+            override fun onFailure(call: Call<PokemonResponse>, t: Throwable){
+                Log.e("failed", ""+t.message)
+            }
+        })
     }
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()

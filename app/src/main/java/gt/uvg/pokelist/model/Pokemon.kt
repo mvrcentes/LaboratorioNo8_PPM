@@ -14,4 +14,5 @@ data class Pokemon(
     val imageUrlShinnyBack: String get() = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/$id.png"
 }
 
-data class PokemonResponse(@Json(name = "results") val result : List<Pokemon>)
+data class PokemonResponse(@Json(name="results")
+                           val result : List<Pokemon>)

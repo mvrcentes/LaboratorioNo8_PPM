@@ -5,7 +5,6 @@ class PokemonRepository {
 
     // Obtain pokemon list from https://pokeapi.co/
     fun getPokemonList(): List<Pokemon> {
-
         return listOf(
             Pokemon("name", 1)
 //            Pokemon(1, "bulbasaur"),
