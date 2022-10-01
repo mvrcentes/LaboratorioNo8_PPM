@@ -22,13 +22,13 @@ class PokemonListAdapter(private val pokemonList: List<Pokemon>) : RecyclerView.
     override fun onBindViewHolder(holder: PokemonListHolder, position: Int) {
         val pokemon = pokemonList[position]
         holder.binding.pokemonName.text = pokemon.name
-        Picasso.get().load(pokemon.imageUrlFront(position)).into(holder.binding.pokemonPhoto)
-        Picasso.get().load(pokemon.imageUrlBack(position)).into(holder.binding.pokemonPhoto)
-        Picasso.get().load(pokemon.imageUrlShinnyBack(position)).into(holder.binding.pokemonPhoto)
-        Picasso.get().load(pokemon.imageUrlShinnyFront(position)).into(holder.binding.pokemonPhoto)
+        Picasso.get().load(pokemon.imageUrlFront(position + 1)).into(holder.binding.pokemonPhoto)
+//        Picasso.get().load(pokemon.imageUrlBack(position + 1)).into(holder.binding.pokemonPhoto)
+//        Picasso.get().load(pokemon.imageUrlShinnyBack(position + 1)).into(holder.binding.pokemonPhoto)
+//        Picasso.get().load(pokemon.imageUrlShinnyFront(position + 1)).into(holder.binding.pokemonPhoto)
 
         holder.binding.root.setOnClickListener{
-            val action = MainFragmentDirections.actionMainFragmentToDetailFragment(position+1)
+            val action = MainFragmentDirections.actionMainFragmentToDetailFragment(position)
             holder.itemView.findNavController().navigate(action)
         }
     }

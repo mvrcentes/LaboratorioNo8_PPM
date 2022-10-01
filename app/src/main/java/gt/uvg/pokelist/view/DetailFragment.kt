@@ -44,6 +44,7 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.textView.text = "Front"
+        pokemonId++
         Picasso.get().load(imageUrlFront(pokemonId)).placeholder(R.drawable.default_image)
             .error(R.drawable.default_image).into(binding.imageView2)
         binding.textView2.text = "Back"
