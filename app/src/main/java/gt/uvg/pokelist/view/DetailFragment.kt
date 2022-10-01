@@ -28,7 +28,7 @@ class DetailFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let{pokemonId = it.getInt(p_ID)}
+        arguments?.let{pokemonId = it.getInt(p_ID)} //obtener el id desde adapter...
     }
 
     override fun onCreateView(
@@ -43,38 +43,28 @@ class DetailFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val client = ApiClient.service.getFirst100Pokemon().enqueue(object :
-            Callback<PokemonResponse> {
-            override fun onResponse(
-                call: Call<PokemonResponse>,
-                response: Response<PokemonResponse>
-            ) {
-                val pokemonList = response.body()?.result!!
-                val pokemon = pokemonList.find { it.id == pokemonId }
-                binding.textView.text = "Front"
-                Picasso.get().load(pokemon!!.imageUrlFront).placeholder(R.drawable.default_image)
-                    .error(R.drawable.default_image).into(binding.imageView2)
-                binding.textView2.text = "Back"
-                Picasso.get().load(pokemon.imageUrlBack).placeholder(R.drawable.default_image)
-                    .error(R.drawable.default_image).into(binding.imageView3)
-                binding.textView3.text = "Front Shiny"
-                Picasso.get().load(pokemon.imageUrlShinnyFront)
-                    .placeholder(R.drawable.default_image).error(R.drawable.default_image)
-                    .into(binding.imageView4)
-                binding.textView4.text = "Back Shiny"
-                Picasso.get().load(pokemon.imageUrlShinnyBack).placeholder(R.drawable.default_image)
-                    .error(R.drawable.default_image).into(binding.imageView5)
-            }
-
-            override fun onFailure(call: Call<PokemonResponse>, t: Throwable) {
-                Toast.makeText(requireContext(), "ERROR", Toast.LENGTH_LONG).show()
-            }
-        })
+        binding.textView.text = "Front"
+        Picasso.get().load(imageUrlFront(pokemonId)).placeholder(R.drawable.default_image)
+            .error(R.drawable.default_image).into(binding.imageView2)
+        binding.textView2.text = "Back"
+        Picasso.get().load(imageUrlBack(pokemonId)).placeholder(R.drawable.default_image)
+            .error(R.drawable.default_image).into(binding.imageView3)
+        binding.textView3.text = "Front Shiny"
+        Picasso.get().load(imageUrlShinnyFront(pokemonId))
+            .placeholder(R.drawable.default_image).error(R.drawable.default_image)
+            .into(binding.imageView4)
+        binding.textView4.text = "Back Shiny"
+        Picasso.get().load(imageUrlShinnyBack(pokemonId)).placeholder(R.drawable.default_image)
+            .error(R.drawable.default_image).into(binding.imageView5)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+    fun imageUrlFront(id: Int): String = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$id.png"
+    fun imageUrlBack(id: Int): String  = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/$id.png"
+    fun imageUrlShinnyFront(id: Int): String = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/$id.png"
+    fun imageUrlShinnyBack(id: Int): String = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/$id.png"
 }

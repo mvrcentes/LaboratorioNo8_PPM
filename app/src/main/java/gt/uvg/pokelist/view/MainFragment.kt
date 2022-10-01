@@ -28,7 +28,7 @@ class MainFragment: Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val client = ApiClient.service.getFirst100Pokemon().enqueue(object : Callback<PokemonResponse> {
+        ApiClient.service.getFirst100Pokemon().enqueue(object : Callback<PokemonResponse> {
                 override fun onResponse(
                     call: Call<PokemonResponse>,
                     response: Response<PokemonResponse>
@@ -37,7 +37,7 @@ class MainFragment: Fragment() {
                 recyclerView = binding.recyclerView
                 recyclerView.layoutManager = LinearLayoutManager(context)
                 recyclerView.adapter = PokemonListAdapter(pokemonList!!)
-                Toast.makeText(requireContext(), "FETCHED: " + response.body(), Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "FETCHED: " + pokemonList.size, Toast.LENGTH_LONG).show()
             }
             override fun onFailure(call: Call<PokemonResponse>, t: Throwable) {
                 Toast.makeText(requireContext(), "ERROR", Toast.LENGTH_LONG).show()

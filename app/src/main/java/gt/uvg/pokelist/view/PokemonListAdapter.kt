@@ -22,14 +22,16 @@ class PokemonListAdapter(private val pokemonList: List<Pokemon>) : RecyclerView.
     override fun onBindViewHolder(holder: PokemonListHolder, position: Int) {
         val pokemon = pokemonList[position]
         holder.binding.pokemonName.text = pokemon.name
-        Picasso.get().load(pokemon.imageUrlFront).into(holder.binding.pokemonPhoto)
+        Picasso.get().load(pokemon.imageUrlFront(position)).into(holder.binding.pokemonPhoto)
+        Picasso.get().load(pokemon.imageUrlBack(position)).into(holder.binding.pokemonPhoto)
+        Picasso.get().load(pokemon.imageUrlShinnyBack(position)).into(holder.binding.pokemonPhoto)
+        Picasso.get().load(pokemon.imageUrlShinnyFront(position)).into(holder.binding.pokemonPhoto)
 
         holder.binding.root.setOnClickListener{
-            val action = MainFragmentDirections.actionMainFragmentToDetailFragment(pokemon.id)
+            val action = MainFragmentDirections.actionMainFragmentToDetailFragment(position+1)
             holder.itemView.findNavController().navigate(action)
         }
     }
-
     override fun getItemCount(): Int {
         return pokemonList.size
     }
